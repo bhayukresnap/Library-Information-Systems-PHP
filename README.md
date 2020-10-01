@@ -1,4 +1,3 @@
-# PHP---Blog-Admin-Panel
 Demo project
 
 Requirements
