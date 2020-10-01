@@ -18,6 +18,16 @@
 			return json_encode($data);
 		}
 
+		public function display($conditions = "", $select = '*'){
+			$start = isset($_GET['page']) && !empty($_GET['page']) ? $_GET['page'] - 1 : 0;
+			$limit = " limit ".($start * LIMIT_PER_PAGE).", ". LIMIT_PER_PAGE;
+			$data = $this->select($conditions.$limit, $select);
+			return json_encode(array(
+				'data'=> json_decode($data, true),
+				'page'=> $this->pagination($conditions),
+			));
+		}
+
 		public function update($data){
 			return $this->conn->query("update $this->table set ".Helper::mapUpdate($this->columns, $data)." where id = '$data[id]'");
 		}
@@ -35,6 +45,34 @@
 			}
 			//exit(header("location: ".Helper::currentURL()));
 			return 0;
+		}
+
+		public function pagination($conditions){
+			$temp = ''; $data = [];
+			$count = count(json_decode($this->select($conditions), true));
+			$total_pages = ceil($count / LIMIT_PER_PAGE);
+			if($total_pages <= 1) return "";
+			$active = '';
+			$temp .= '<div class="d-flex justify-content-center">';
+			$temp .= 	'<div>';
+			$temp .=		'<ul class="pagination pagination-sm ">';
+			for($i = 1; $i <= $total_pages; $i++){
+				$query = $_GET;
+				$query['page'] = $i;
+				$query_result = http_build_query($query);
+				$url = $_SERVER['PHP_SELF'].'?'.$query_result;
+				if(isset($_GET['page']) && !empty($_GET['page'])){
+					if($_GET['page'] == $i) $active = 'active';
+				}else{
+					if($i == 1) $active = 'active';
+				}
+				$temp .= 		'<li class="page-item '.$active.'"><a class="page-link" href="'.$url.'">'.$i.'</a></li>';
+				$active = '';
+			}
+			$temp .= 		'</ul>';
+			$temp .= 	'</div>';
+			$temp .= '</div>';
+			return $temp;
 		}
 
 		public function __destruct(){

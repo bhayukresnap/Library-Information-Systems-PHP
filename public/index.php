@@ -8,9 +8,11 @@ $books = new Book();
 <html>
 <head>
 	<title></title>
-	<?php require_once($_SERVER['DOCUMENT_ROOT']."/templates/vendor_library.php");?>
+	<?php require_once($_SERVER['DOCUMENT_ROOT']."/templates/vendor_library.php");
+
+	?>
 	<script type="text/javascript">
-		const books = <?php echo $books->select("inner join publisher on books.publisher_id = publisher.id left join types on books.book_type_id = types.id", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publisher.publisher_name, types.book_type'); ?>
+		const books = <?php echo $books->display("inner join publisher on books.publisher_id = publisher.id left join types on books.book_type_id = types.id", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publisher.publisher_name, types.book_type'); ?>
 	</script>
 </head>
 <body class="app sidebar-mini">
@@ -28,13 +30,12 @@ $books = new Book();
 		<div class="tile mb-4">
 			<div class="page-header"></div>
 			<div class="row" id="list_book">
-				
 			</div>
 		</div>
 	</main>
 	<script type="text/javascript">
 		function fetchBooks(json){
-			json.map(function(data){
+			json.data.map(function(data){
 				let str = '';
 				str +=	'<div class="col-6 col-md-2">'
 				str +=		'<div class="card mb-3 border-light" data-toggle="tooltip" title="'+data.name+'">'
@@ -56,6 +57,7 @@ $books = new Book();
 				str +=	'</div>'
 				$('#list_book').append(str);
 			});
+			$(json.page).insertAfter('#list_book');
 		}
 		fetchBooks(books)
 	</script>

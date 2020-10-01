@@ -1,5 +1,13 @@
 <?php 
 	require_once($_SERVER['DOCUMENT_ROOT'].'/src/AdminSession.php');
+	$query = $_GET;
+// replace parameter(s)
+$query['d'] = 'new_value';
+// rebuild url
+$query_result = http_build_query($query);
+// new link
+print($_SERVER['PHP_SELF'].'?'.$query_result);
+	echo "<br><br><br><br>";
 	function chess($x, $y){
 		$temp = 0;
 		for($i = 0; $i<$y; $i++){

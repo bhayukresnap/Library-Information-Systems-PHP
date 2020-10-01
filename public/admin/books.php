@@ -13,9 +13,9 @@ if (isset($_GET['delete']) && !empty($_GET['delete'])) $book->delete($_GET['dele
 	<script type="text/javascript">
 		const books = <?php 
 		if (isset($_GET['search']) && !empty($_GET['search'])){
-			echo $book->select("where book_name like '%$_GET[search]%'", "books.id as book_id, books.book_name as name, books.book_image as image");
+			echo $book->display("where book_name like '%$_GET[search]%'", "books.id as book_id, books.book_name as name, books.book_image as image");
 		}else{
-			echo $book->select("", "books.id as book_id, books.book_name as name, books.book_image as image");
+			echo $book->display("", "books.id as book_id, books.book_name as name, books.book_image as image");
 		}
 		?>
 	</script>
@@ -86,7 +86,7 @@ if (isset($_GET['delete']) && !empty($_GET['delete'])) $book->delete($_GET['dele
 	<script type="text/javascript">
 		function fetchBooks(json){
 			let no = 1;
-			json.map(function(data){
+			json.data.map(function(data){
 				let str = '';
 				str +=	'<tr>'
 				str +=		'<td>'+no+'</td>'
@@ -100,6 +100,7 @@ if (isset($_GET['delete']) && !empty($_GET['delete'])) $book->delete($_GET['dele
 				$('#list_books tbody').append(str);
 				no++;
 			});
+			$(json.page).insertAfter('#list_books tbody');
 		}
 		fetchBooks(books)
 	</script>
