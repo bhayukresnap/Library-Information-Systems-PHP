@@ -1,0 +1,7 @@
+.text-with-line{
+	text-decoration: line-through;
+}
+
+.ck-editor__editable_inline {
+	min-height: 250px;
+}
