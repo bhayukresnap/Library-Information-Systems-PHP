@@ -6,7 +6,7 @@ $query['d'] = 'new_value';
 // rebuild url
 $query_result = http_build_query($query);
 // new link
-print($_SERVER['PHP_SELF'].'?'.$query_result);
+print($_SERVER['PHP_SELF']);
 	echo "<br><br><br><br>";
 	function chess($x, $y){
 		$temp = 0;

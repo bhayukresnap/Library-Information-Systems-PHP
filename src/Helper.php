@@ -14,6 +14,8 @@
 			return "//".$_SERVER['HTTP_HOST'].strtok($_SERVER['REQUEST_URI'], '?');
 		}
 
+
+
 		public function mapUpdate($columns, $data){
 			if(isset($data["id"])) unset($data["id"]);
 			return join(", ", array_map(function($key, $value){
@@ -38,6 +40,13 @@
 			$image_name = IMG_PATH_DIR . preg_replace("/[^A-Za-z0-9?!]/", "_", strtolower(basename($book_name)));
 			$full_path = $image_name . "." . $extension;
 			return $full_path;
+		}
+
+		public function pagePagination($value){
+			$query = $_GET;
+			$query['page'] = $value;
+			$query_result = http_build_query($query);
+			return $url = str_replace("/public", "", $_SERVER['PHP_SELF']).'?'.$query_result;
 		}
 
 		public function imageVerification($image, $book_name){

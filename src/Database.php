@@ -52,23 +52,38 @@
 			$count = count(json_decode($this->select($conditions), true));
 			$total_pages = ceil($count / LIMIT_PER_PAGE);
 			if($total_pages <= 1) return "";
-			$active = '';
-			$temp .= '<div class="d-flex justify-content-center">';
+			$active = ''; $next = ''; $url = ''; $previous = '';
+			$temp .= '<div class="d-flex justify-content-center mt-4">';
 			$temp .= 	'<div>';
 			$temp .=		'<ul class="pagination pagination-sm ">';
-			for($i = 1; $i <= $total_pages; $i++){
-				$query = $_GET;
-				$query['page'] = $i;
-				$query_result = http_build_query($query);
-				$url = $_SERVER['PHP_SELF'].'?'.$query_result;
-				if(isset($_GET['page']) && !empty($_GET['page'])){
-					if($_GET['page'] == $i) $active = 'active';
-				}else{
-					if($i == 1) $active = 'active';
+			if(!isset($_GET['page']) || empty($_GET['page']) || $_GET['page'] == 1){
+				$next = Helper::pagePagination(2);
+				$previous_disabled = "d-none";
+			}else{
+				if($_GET['page'] == $total_pages){
+					$next_disabled = 'd-none';
 				}
-				$temp .= 		'<li class="page-item '.$active.'"><a class="page-link" href="'.$url.'">'.$i.'</a></li>';
+				$next = Helper::pagePagination($_GET['page'] + 1);
+				$previous = Helper::pagePagination($_GET['page'] - 1);
+			}
+			$temp .= 	'<li class="page-item '.(isset($previous_disabled) ? $previous_disabled : "").'"><a class="page-link" href="'.$previous.'">«</a></li>';
+			for($i = 1; $i <= $total_pages; $i++){
+				$url = Helper::pagePagination($i);
+				if(isset($_GET['page']) && !empty($_GET['page'])){
+					if($_GET['page'] == $i){
+						$active = 'active';
+						$url = '#';
+					}					
+				}else{
+					if($i == 1){
+						$active = 'active';
+						$url = '#';
+					}
+				}	
+				$temp .= 		'<li class="page-item '.$active.'"><a class="page-link" href="'.$url.'">'.$i.'</a></li>';			
 				$active = '';
 			}
+			$temp .= 			'<li class="page-item '.(isset($next_disabled) ? $next_disabled : "").'"><a class="page-link" href="'.$next.'">»</a></li>';
 			$temp .= 		'</ul>';
 			$temp .= 	'</div>';
 			$temp .= '</div>';
