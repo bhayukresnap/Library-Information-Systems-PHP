@@ -16,6 +16,7 @@
 		}else if($user[0]['role_id'] < 1){
 			Helper::notification("You don't have permission to access this panel!");
 			exit(header("Location: /"));
+			unset($_SESSION['user']);
 		}
 
 	}

@@ -1,4 +1,27 @@
 <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Publisher.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Tag.php');
+    $publisher = new Publisher();
+    $tag = new Tag();
+    $publishers = [];
+    $tags = [];
+    foreach(json_decode($publisher->select(), true) as $publisher){
+      $publishers[] = array(
+        "id"=>$publisher['id'],
+          "text"=>$publisher['publisher_name'],
+          "url"=>"/publisher?id=".$publisher['id'],
+      );
+    };
+
+    foreach(json_decode($tag->select(), true) as $tag){
+      $tags[] = array(
+        "id"=>$tag['id'],
+          "text"=>$tag['tag_name'],
+          "url"=>"/tag?id=".$tag['id'],
+      );
+    };
+
+
     $side_bars = 
     array(
       array(
@@ -10,6 +33,22 @@
         "child"=>"",
       ),
       array(
+        "id"=>"publisher",
+        "text"=>"Publisher",
+        "icon"=>"fa-building-o",
+        "url"=>"/",
+        "role_id"=> 1,
+        "child"=> $publishers,
+      ),
+      array(
+        "id"=>"tag",
+        "text"=>"Tags",
+        "icon"=>"fa-tags",
+        "url"=>"/",
+        "role_id"=> 1,
+        "child"=> $tags,
+      ),
+      array(
         "id"=>"admin",
         "text"=>"Admin panel",
         "icon"=>"fa-user-o",
@@ -19,31 +58,26 @@
           array(
             "id"=>"books",
             "text"=>"Books",
-            "icon"=>"fa-book",
             "url"=>"/admin/books",
           ),
           array(
             "id"=>"tags",
             "text"=>"Tags",
-            "icon"=>"fa-tag",
             "url"=>"/admin/tags",
           ),
           array(
             "id"=>"racks",
             "text"=>"Racks",
-            "icon"=>"fa-archive",
             "url"=>"/admin/racks",
           ),
           array(
             "id"=>"publisher",
             "text"=>"Publisher",
-            "icon"=>"fa-industry",
             "url"=>"/admin/publisher",
           ),
           array(
             "id"=>"types",
             "text"=>"Types",
-            "icon"=>"fa-list",
             "url"=>"/admin/types",
           ),
         ),
@@ -77,7 +111,7 @@
             $toggle_class = "treeview";
             $arrow_indicator = '<i class="treeview-indicator fa fa-angle-right"></i>';
             foreach($sidebar['child'] as $child){
-              if(strpos($url, $child['url']) !== false){
+              if(strpos($url, $child['url']) !== false || strpos($_SERVER['REQUEST_URI'], $child['url']) !== false){
                 $active = 'active';
               }else{
                 $active = '';

@@ -1,10 +1,17 @@
 <?php 
-	require_once($_SERVER['DOCUMENT_ROOT'].'/src/AdminSession.php');
-	$query = $_GET;
-// replace parameter(s)
-$query['d'] = 'new_value';
-// rebuild url
-$query_result = http_build_query($query);
+	require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Publisher.php');
+  $publisher = new Publisher();
+  $publishers = [];
+  foreach(json_decode($publisher->select(), true) as $publisher){
+  	$publishers[] = array(
+  		"id"=>"publisher".$publisher['id'],
+        "text"=>$publisher['publisher_name'],
+        "url"=>"/publisher?id=".$publisher['id'],
+  	);
+  };
+
+  print_r($publishers);
+
 // new link
 print($_SERVER['PHP_SELF']);
 	echo "<br><br><br><br>";
