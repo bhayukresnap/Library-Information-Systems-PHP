@@ -53,7 +53,7 @@ $books = new Book();
 					str +=			'</a>'
 					str +=			'<div class="card-body">'
 					str +=				'<h6 class="text-truncate m-0">'+data.name+'</h6>'
-					str +=				'<a href="#">'+data.publisher_name+'</a>'
+					str +=				'<a href="/publisher?id='+data.publisher_id+'">'+data.publisher_name+'</a>'
 					str +=				'<div class="mb-2">'+data.book_type+'</div>'
 					if(data.price_after != 0){
 						str +=				'<div><s>'+currencyRp(data.price_before)+'</s></div>'
