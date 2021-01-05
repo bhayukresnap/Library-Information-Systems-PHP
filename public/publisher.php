@@ -1,5 +1,5 @@
 <?php 
-if(!isset($_GET['id'])) exit(header("Location: /"));
+if(!isset($_GET['id']) || empty($_GET['id'])) exit(header("Location: /"));
 elseif (empty($_GET['id'])) exit(header("Location: /"));
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Session.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Book.php');
@@ -16,7 +16,7 @@ $books = new Book();
 
 	?>
 	<script type="text/javascript">
-		const books = <?php echo $books->display("inner join publisher on books.publisher_id = publisher.id left join types on books.book_type_id = types.id where publisher.id = $_GET[id]", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publisher.publisher_name, types.book_type'); ?>;
+		const books = <?php echo $books->display("inner join publishers on books.publisher_id = publishers.id left join types on books.book_type_id = types.id where publishers.id = $_GET[id]", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publishers.publisher_name, types.book_type'); ?>;
 		const publisher = "<?php 
 			echo json_decode($publisher->select("where id = $_GET[id]"), true)[0]["publisher_name"];
 		 ?>";
@@ -29,6 +29,9 @@ $books = new Book();
 		<div class="app-title">
 			<div class="div">
 				<h1><i class="fa fa-book"></i> Welcome to Vali - Library</h1>
+				<?php 
+					echo $_SERVER['REQUEST_URI'];
+				 ?>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

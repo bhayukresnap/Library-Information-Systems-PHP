@@ -10,6 +10,11 @@
 			];
 		}
 
+		public function select2(){
+			$value = trim(" classics ");
+			return $this->select("where tag_name = '".$value."'");
+		}
+
 		public function insert($value){
 			$insert = parent::insert($value);
 			if(!$insert){

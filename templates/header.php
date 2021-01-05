@@ -1,3 +1,17 @@
+<!-- <style type="text/css">
+.badge:after{
+content:attr(value);
+font-size:12px;
+background: red;
+border-radius:50%;
+padding:3px;
+position:relative;
+left:-8px;
+top:-10px;
+opacity:0.9;
+}
+</style> -->
+
 <header class="app-header">
   <a class="app-header__logo" href="index.html">Vali - Library</a>
       <!-- Sidebar toggle button-->
@@ -9,7 +23,15 @@
           <button class="app-search__button"><i class="fa fa-search"></i></button>
         </li> -->
         <!--Notification Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+        <li>
+          <a class="app-nav__item" href="/cart">
+              <i class="fa fa-shopping-bag fa-lg" ></i> 
+          </a>
+        </li>
+        <!-- <li class="dropdown">
+          <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications">
+              <i class="fa fa-shopping-bag fa-lg" ></i> 
+         </a>
           <ul class="app-notification dropdown-menu dropdown-menu-right">
             <li class="app-notification__title">You have 4 new notifications.</li>
             <div class="app-notification__content">
@@ -48,12 +70,12 @@
             </div>
             <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
           </ul>
-        </li>
+        </li> -->
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="/orders"><i class="fa fa-user fa-lg"></i> Your orders</a></li>
             <li><a class="dropdown-item" href="/logout"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>

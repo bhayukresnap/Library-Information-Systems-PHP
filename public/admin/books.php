@@ -101,6 +101,7 @@ if (isset($_GET['delete']) && !empty($_GET['delete'])) $book->delete($_GET['dele
 				no++;
 			});
 			$(json.page).insertAfter('#list_books tbody');
+			console.log(json)
 		}
 		fetchBooks(books)
 	</script>

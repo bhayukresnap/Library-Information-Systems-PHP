@@ -18,7 +18,7 @@
 			<h1>Vali - Library</h1>
 		</div>
 		<div class="login-box">
-			<form class="login-form" method="POST" action="/login/validation">
+			<form class="login-form" method="POST" action="/validation/login">
 				<h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
 				<div class="form-group">
 					<label class="control-label">USERNAME</label>

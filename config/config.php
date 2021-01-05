@@ -12,4 +12,5 @@
 	define("IMG_PATH_DIR", '/images/');
 	define("IMG_EXTENSIONS", ['jpg', 'jpeg', 'png', 'gif']);
 	define("PUBLIC_PATH", $_SERVER['DOCUMENT_ROOT']."/public/");
+	define("DATE", date("Y-m-d h:i:s"));
  ?>

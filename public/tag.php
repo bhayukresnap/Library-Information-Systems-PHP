@@ -1,6 +1,5 @@
 <?php 
-if(!isset($_GET['id'])) exit(header("Location: /"));
-elseif (empty($_GET['id'])) exit(header("Location: /"));
+if(!isset($_GET['id']) || empty($_GET['id'])) exit(header("Location: /"));
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Session.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Book.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Tag.php');
@@ -16,7 +15,7 @@ $books = new Book();
 
 	?>
 	<script type="text/javascript">
-		const books = <?php echo $books->display("inner join publisher on books.publisher_id = publisher.id left join types on books.book_type_id = types.id left join books_tags on books.id = books_tags.book_id where books_tags.tag_id = $_GET[id]", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publisher.publisher_name, types.book_type'); ?>;
+		const books = <?php echo $books->display("inner join publishers on books.publisher_id = publishers.id left join types on books.book_type_id = types.id left join books_tags on books.id = books_tags.book_id where books_tags.tag_id = $_GET[id]", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publishers.publisher_name, types.book_type'); ?>;
 		const tag = "<?php 
 			echo json_decode($tag->select("where id = $_GET[id]"), true)[0]["tag_name"];
 		 ?>";

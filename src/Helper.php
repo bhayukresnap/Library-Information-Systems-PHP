@@ -1,6 +1,6 @@
 <?php 
 	class Helper{
-		public function notification($message, $type = 0){
+		public static function notification($message, $type = 0){
 			$notification = array(
 				"message"=>$message,
 				"type"=>$type == 1 ? "success" : "danger",
@@ -10,28 +10,27 @@
 			$_SESSION['notification'] = json_encode($notification);
 		}
 
-		public function currentURL(){
+		public static function currentURL(){
 			return "//".$_SERVER['HTTP_HOST'].strtok($_SERVER['REQUEST_URI'], '?');
 		}
 
 
-
-		public function mapUpdate($columns, $data){
+		public static function mapUpdate($columns, $data){
 			if(isset($data["id"])) unset($data["id"]);
 			return join(", ", array_map(function($key, $value){
-				return $key." = '".$value."'";
+				return $key." = \"".$value."\"";
 			}, $columns, $data));
 		}
 
-		public function mapInsert($data){
+		public static function mapInsert($data){
 			if(isset($data["id"])) unset($data["id"]);
 			if(!is_array($data)) return "'".$data."'";
 			return join(", ", array_map(function($value){
-				return "'".$value."'";
+				return "\"".$value."\"";
 			}, $data));
 		}
 
-		public function renameImage($image, $book_name){
+		public static function renameImage($image, $book_name){
 			if(is_array($image)){
 				$extension = pathinfo($image['name'], PATHINFO_EXTENSION);
 			}else{
@@ -42,14 +41,14 @@
 			return $full_path;
 		}
 
-		public function pagePagination($value){
+		public static function pagePagination($value){
 			$query = $_GET;
 			$query['page'] = $value;
 			$query_result = http_build_query($query);
 			return $url = str_replace("/public", "", $_SERVER['PHP_SELF']).'?'.$query_result;
 		}
 
-		public function imageVerification($image, $book_name){
+		public static function imageVerification($image, $book_name){
 			$message = '';
 			$path = pathinfo($image['name'], PATHINFO_EXTENSION);
 			$full_path = Helper::renameImage($image, $book_name);

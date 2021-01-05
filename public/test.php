@@ -1,3 +1,22 @@
+<?php
+echo "ID".mt_rand(1,100000);
+echo "<br>";
+$res = str_repeat("0", 1); 
+echo $res;
+
+function id_order_generator(){
+	$temp_id = mt_rand(1,999999999);
+	$zero = str_repeat("0", 9 - strlen($temp_id));
+	return "ID".$zero.$temp_id;
+}
+
+echo "<br>";
+
+echo id_order_generator();
+echo "<br>";
+echo strlen(id_order_generator());
+?>
+
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Session.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/src/Controller/Book.php');
@@ -12,7 +31,7 @@ $books = new Book();
 
 	?>
 	<script type="text/javascript">
-		const books = <?php echo $books->display("inner join publishers on books.publisher_id = publishers.id left join types on books.book_type_id = types.id", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publishers.publisher_name, types.book_type'); ?>
+		const books = <?php echo $books->display("inner join publisher on books.publisher_id = publisher.id left join types on books.book_type_id = types.id", 'books.id as book_id, books.book_name as name, books.book_image as image, books.price_before, books.price_after, books.publisher_id, publisher.publisher_name, types.book_type'); ?>
 	</script>
 </head>
 <body class="app sidebar-mini">

@@ -4,7 +4,7 @@
 		
 		public function __construct(){
 			parent::__construct();
-			$this->table = "publisher";
+			$this->table = "publishers";
 			$this->columns = [
 				"publisher_name",
 			];

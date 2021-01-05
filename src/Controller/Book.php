@@ -18,8 +18,8 @@
 			];
 		}
 
-		function delete($id){
-			$check = $this->select("where id = $id");
+		function delete($id, $trigger = 'id'){
+			$check = $this->select("where $trigger = $id");
 			$delete = parent::delete($id);
 			if($delete){
 				unlink(PUBLIC_PATH . json_decode($check, true)[0]['book_image']);
@@ -64,7 +64,6 @@
 			}else{
 				Helper::notification("Duplicate Entry Found!");
 			}
-
 		}
 
 		public function insert($data){
@@ -77,7 +76,7 @@
 					return;
 				}
 			}
-			$check = $this->select('where book_name = '.trim($data['book_name']));
+			$check = $this->select('where book_name = "'.trim($data['book_name']).'"');
 			if(count(json_decode($check, true)) >= 1){
 				//link(PUBLIC_PATH . $image);
 				Helper::notification("This book is already exist!");

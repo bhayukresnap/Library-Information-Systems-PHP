@@ -71,9 +71,9 @@
             "url"=>"/admin/racks",
           ),
           array(
-            "id"=>"publisher",
-            "text"=>"Publisher",
-            "url"=>"/admin/publisher",
+            "id"=>"publishers",
+            "text"=>"Publishers",
+            "url"=>"/admin/publishers",
           ),
           array(
             "id"=>"types",
@@ -111,7 +111,7 @@
             $toggle_class = "treeview";
             $arrow_indicator = '<i class="treeview-indicator fa fa-angle-right"></i>';
             foreach($sidebar['child'] as $child){
-              if(strpos($url, $child['url']) !== false || strpos($_SERVER['REQUEST_URI'], $child['url']) !== false){
+              if(strpos($url, $child['url']) !== false || $_SERVER['REQUEST_URI'] == $child['url']){
                 $active = 'active';
               }else{
                 $active = '';
@@ -129,7 +129,7 @@
             $active = 'active';
           }
           
-          if($sidebar['role_id'] <= $_SESSION['user']['role_id']){
+          if($sidebar['role_id'] == $_SESSION['user']['role_id']){
               echo 
             '<li class="'.$toggle_class.' '.$expanded.'">
               <a class="app-menu__item '.$active.'" id="'.$sidebar['id'].'" href="'.$sidebar['url'].'" '.$toggle.'>

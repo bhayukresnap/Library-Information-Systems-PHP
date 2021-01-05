@@ -1,12 +1,13 @@
 <?php 
 	require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'].'/src/Helper.php');
-	class Database{	
+	class Database{
 		protected $conn, $utf = 'utf8'; // Database connection
 		protected $table, $columns; // Database table
 		protected $message = "", $status = 0; // Notification
 		public function __construct(){
-			$this->conn = new mysqli(DATABASE['server'], DATABASE['username'], DATABASE['password'], DATABASE['dbname']);
+			//$this->conn = new mysqli(DATABASE['server'], DATABASE['username'], DATABASE['password'], DATABASE['dbname']);
+			$this->conn = new mysqli('localhost', 'root', '', 'library');
 			$this->conn->set_charset($this->utf);
 			if(!$this->conn) die("Connection Failed: ". mysqli_connect_error());
 		}
@@ -36,10 +37,10 @@
 			return $this->conn->query("insert into $this->table (".join(", ",$this->columns).") values (".Helper::mapInsert($value).")");
 		}
 
-		public function delete($id){
-			$check = $this->select("where id = $id");
+		public function delete($id, $trigger = 'id'){
+			$check = $this->select("where $trigger = $id");
 			if(count(json_decode($check, true)) >= 1){
-				$delete =  $this->conn->query("delete from $this->table where id = $id");
+				$delete =  $this->conn->query("delete from $this->table where $trigger = $id");
 				Helper::notification("Data has been successfully removed!", 1);
 				return 1;
 			}

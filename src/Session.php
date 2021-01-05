@@ -17,8 +17,9 @@
 			Helper::notification("You don't have permission to access this panel!");
 			exit(header("Location: /"));
 			unset($_SESSION['user']);
+		}else if($user[0]['role_id'] == 2){
+			exit(header("Location: /admin"));
 		}
-
 	}
 
  ?>
