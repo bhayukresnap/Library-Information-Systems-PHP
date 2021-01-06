@@ -88,7 +88,7 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-  <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+  <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/default-user-image.png" alt="User Image" width="45px">
     <div>
       <p class="app-sidebar__user-name"><?php echo $_SESSION['user']['name']; ?></p>
       <p class="app-sidebar__user-designation">Frontend Developer</p>
