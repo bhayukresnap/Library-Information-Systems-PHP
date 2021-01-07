@@ -44,7 +44,7 @@ if(count(json_decode($book->select("inner join shopping_cart on shopping_cart.us
 					<div data-price></div>
 					<div data-tags></div>
 					<div class="my-2">
-						<a href="/validation/add_book?id=<?php echo $_GET['id']?>" class="btn btn-primary <?php isset($disabled) ? print($disabled) : "" ?>">
+						<a href="/cart/add_book?id=<?php echo $_GET['id']?>" class="btn btn-primary <?php isset($disabled) ? print($disabled) : "" ?>">
 							Add to cart
 							<i class="fa fa-shopping-bag"></i>
 						</a>

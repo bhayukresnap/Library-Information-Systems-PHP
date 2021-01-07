@@ -14,6 +14,11 @@
 			return "//".$_SERVER['HTTP_HOST'].strtok($_SERVER['REQUEST_URI'], '?');
 		}
 
+		public static function id_order_generator(){
+			$temp_id = mt_rand(1,999999999);
+			$zero = str_repeat("0", 9 - strlen($temp_id));
+			return "ID".$zero.$temp_id;
+		}
 
 		public static function mapUpdate($columns, $data){
 			if(isset($data["id"])) unset($data["id"]);

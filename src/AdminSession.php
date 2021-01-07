@@ -13,7 +13,7 @@
 			Helper::notification("There is a problem with your account, please contact Administrator!");
 			exit(header("Location: /login"));
 			unset($_SESSION['user']);
-		}elseif($user[0]['role_id'] != 2){
+		}elseif($user[0]['role_id'] < 2){
 			Helper::notification("You don't have permission to access this panel!");
 			exit(header("Location: /"));
 		}

@@ -49,6 +49,14 @@
         "child"=> $tags,
       ),
       array(
+        "id"=>"users",
+        "text"=>"User Management",
+        "icon"=>"fa-users",
+        "url"=>"/admin/users",
+        "role_id"=> 3,
+        "child"=> "",
+      ),
+      array(
         "id"=>"admin",
         "text"=>"Admin panel",
         "icon"=>"fa-user-o",
@@ -129,15 +137,15 @@
             $active = 'active';
           }
           
-          if($sidebar['role_id'] == $_SESSION['user']['role_id']){
-              echo 
-            '<li class="'.$toggle_class.' '.$expanded.'">
-              <a class="app-menu__item '.$active.'" id="'.$sidebar['id'].'" href="'.$sidebar['url'].'" '.$toggle.'>
-                  <i class="app-menu__icon fa '.$sidebar['icon'].'"></i><span class="app-menu__label">'.$sidebar['text'].'</span>
-                  '.$arrow_indicator.'
-              </a>'.$child_text.'
-            </li>';
-          }
+          if(($sidebar['role_id'] <= $_SESSION['user']['role_id'] && $sidebar['role_id'] != 1) || ($sidebar['role_id'] == 1 && $_SESSION['user']['role_id'] == 1)){
+                echo 
+              '<li class="'.$toggle_class.' '.$expanded.'">
+                <a class="app-menu__item '.$active.'" id="'.$sidebar['id'].'" href="'.$sidebar['url'].'" '.$toggle.'>
+                    <i class="app-menu__icon fa '.$sidebar['icon'].'"></i><span class="app-menu__label">'.$sidebar['text'].'</span>
+                    '.$arrow_indicator.'
+                </a>'.$child_text.'
+              </li>';
+              }
         }
      ?>
   </ul>

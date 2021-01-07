@@ -75,7 +75,7 @@ $shoppingcart = new Shoppingcart();
 				str +=		'<td colspan="3" class="text-center align-middle"><b>Total</b></td>'
 				str +=		'<td class="align-middle"><b>'+currencyRp(String(total))+'</b></td>'
 				str +=		'<td>'
-				str +=			'<a href="#"><button class="btn btn-outline-primary mx-1">Order</button></a>'
+				str +=			'<a href="/orders/add"><button class="btn btn-outline-primary mx-1">Order</button></a>'
 				str +=			'<a href="/cart/delete"><button class="btn btn-outline-danger mx-1">Remove all</button></a>'
 				str +=		'</td>'
 				str +=	'</tr>'
