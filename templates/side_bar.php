@@ -88,6 +88,11 @@
             "text"=>"Types",
             "url"=>"/admin/types",
           ),
+          array(
+            "id"=>"orders",
+            "text"=>"Orders",
+            "url"=>"/admin/orders",
+          ),
         ),
       ),
     );

@@ -26,8 +26,15 @@
 				Helper::notification("There is a problem with your order!", 2);
 				return parent::delete($value['order_id']);
 			}
-
 		}
+
+		public function update($data){
+			$update =  $this->conn->query("update $this->table set status='$data[status]' where id = '$data[id]'");
+			if($update){
+				Helper::notification("Order status has been changed!", 1);
+			}
+		}
+
 	}
 
 
