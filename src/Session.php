@@ -19,6 +19,7 @@
 			unset($_SESSION['user']);
 			exit(header("Location: /login"));
 		}else if($user[0]['role_id'] >= 2){
+			Helper::notification("You are not user!");
 			exit(header("Location: /admin"));
 		}
 	}
