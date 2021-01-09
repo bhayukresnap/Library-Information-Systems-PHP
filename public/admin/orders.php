@@ -63,7 +63,7 @@ $orders = new Order();
 				let str = '';
 				str +=	'<tr>'
 				str +=		'<td>'+no+'</td>'
-				str +=		'<td>'+order.id+'</td>'
+				str +=		'<td><a href="/admin/orders/details?id='+order.id+'">'+order.id+'</a></td>'
 				str +=		'<td>'+order.date+'</td>'
 				str +=		'<td>'+order.last_update_by+'</td>'
 				str +=		'<td>'
@@ -87,9 +87,9 @@ $orders = new Order();
 					case 4: break;
 					default:
 					str +=			'<select class="select" onchange="window.location = ($(this).val())">'
-					str +=				'<option disabled selected value="/orders/update?id='+order.id+'&status=1">--Change status--</option>'
-					str +=				'<option value="/admin/orders/update?id='+order.id+'&status=2">Approved</option>'
-					str +=				'<option value="/admin/orders/update?id='+order.id+'&status=3">Rejected</option>'
+					str +=				'<option disabled selected value="/orders/action/update?id='+order.id+'&status=1">--Change status--</option>'
+					str +=				'<option value="/admin/orders/action/update?id='+order.id+'&status=2">Approved</option>'
+					str +=				'<option value="/admin/orders/action/update?id='+order.id+'&status=3">Rejected</option>'
 					str +=			'</select>'
 					break;
 				}

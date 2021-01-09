@@ -58,7 +58,7 @@ $orders = new Order();
 				let str = '';
 				str +=	'<tr>'
 				str +=		'<td>'+no+'</td>'
-				str +=		'<td>'+order.id+'</td>'
+				str +=		'<td><a href="/orders/details?id='+order.id+'">'+order.id+'</a></td>'
 				str +=		'<td>'+order.date+'</td>'
 				str +=		'<td>'+order.last_update_by+'</td>'
 				str +=		'<td>'

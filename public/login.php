@@ -31,16 +31,24 @@
 				<div class="form-group btn-container">
 					<button class="btn btn-primary btn-block" name="submit_login"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
 				</div>
-				<p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+				<p class="semibold-text mb-2"><a href="#" data-toggle="flip">Register here!</a></p>
 			</form>
-			<form class="forget-form">
-				<h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+			<form class="forget-form" method="POST" action="/validation/register">
+				<h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Register ?</h3>
 				<div class="form-group">
 					<label class="control-label">EMAIL</label>
-					<input class="form-control" type="text" placeholder="Email">
+					<input class="form-control" type="text" placeholder="Email" name="email">
+				</div>
+				<div class="form-group">
+					<label class="control-label">NAME</label>
+					<input class="form-control" type="text" placeholder="Email" name="name">
+				</div>
+				<div class="form-group">
+					<label class="control-label">PASSWORD</label>
+					<input class="form-control" type="password" placeholder="password" name="password">
 				</div>
 				<div class="form-group btn-container">
-					<button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+					<button class="btn btn-primary btn-block" type="submit" name="submit_register"><i class="fa fa-user fa-lg fa-fw"></i>Register</button>
 				</div>
 				<div class="form-group mt-3">
 					<p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
